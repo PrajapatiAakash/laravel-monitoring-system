@@ -3,7 +3,7 @@
     "description": "Laravel package used for monitoring the laravel system",
     "autoload": {
         "psr-4": {
-            "Prajapatiakash\\LaravelMonitoringSystem\\": "src/"
+            "PrajapatiAakash\\LaravelMonitoringSystem\\": "src/"
         }
     },
     "authors": [
