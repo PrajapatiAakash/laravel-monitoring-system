@@ -13,6 +13,6 @@ class RequestMonitoringProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__.'/routes/monitoring-system.php')
+        $this->loadRoutesFrom(__DIR__.'/routes/monitoring-system.php');
     }
 }
