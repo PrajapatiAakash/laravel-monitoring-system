@@ -1,0 +1,16 @@
+{
+    "name": "prajapatiakash/laravel-monitoring-system",
+    "description": "Laravel package used for monitoring the laravel system",
+    "autoload": {
+        "psr-4": {
+            "Prajapatiakash\\LaravelMonitoringSystem\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "PrajapatiAakash",
+            "email": "prajapatiakash1021993@gmail.com"
+        }
+    ],
+    "require": {}
+}
