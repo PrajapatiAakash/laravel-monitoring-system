@@ -1,5 +1,5 @@
 {
-    "name": "prajapatiakash/laravel-monitoring-system",
+    "name": "prajapatiaakash/laravel-monitoring-system",
     "description": "Laravel package used for monitoring the laravel system",
     "autoload": {
         "psr-4": {
