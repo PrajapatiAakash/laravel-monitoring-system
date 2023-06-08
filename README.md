@@ -88,4 +88,4 @@ Test the package:
 
 ## License
 
-The Tournament Scheduler is open-sourced project licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Laravel Monitoring System is open-sourced project licensed under the [MIT license](https://opensource.org/licenses/MIT).
