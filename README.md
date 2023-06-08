@@ -85,13 +85,6 @@ Test the package:
 
 ***Note*** : You can quickly set the database information and other variables in this file and have the application fully working.
 
-## Video Demo
-
-
-
-https://user-images.githubusercontent.com/35802146/235425869-6822f4b9-d717-45e2-a7d7-b605b785df1e.mp4
-
-
 
 ## License
 
