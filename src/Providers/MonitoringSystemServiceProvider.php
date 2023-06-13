@@ -2,26 +2,32 @@
 
 namespace PrajapatiAakash\LaravelMonitoringSystem\Providers;
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-ini_set('display_errors', '1');
 
 use Illuminate\Support\ServiceProvider;
 use PrajapatiAakash\LaravelMonitoringSystem\Middleware\LogRequestsAndResponses;
-use PrajapatiAakash\LaravelMonitoringSystem\ErrorLogger;
+use PrajapatiAakash\LaravelMonitoringSystem\QueryLogger;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use PrajapatiAakash\LaravelMonitoringSystem\Exceptions\CustomExceptionHandler;
+use Illuminate\Support\Facades\DB;
+use PrajapatiAakash\LaravelMonitoringSystem\Models\QueryLog;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Events\QueryExecuted;
 
 class MonitoringSystemServiceProvider extends ServiceProvider
 {
     public function register()
     {
     }
+
     /**
      * Bootstrap services.
      *
      * @return void
      */
-    public function boot(ExceptionHandler $exceptionHandler)
+    public function boot()
     {
         $this->app['router']->aliasMiddleware('logrequestsandresponses', LogRequestsAndResponses::class);
         $this->loadRoutesFrom(__DIR__.'/../../routes/monitoring-system.php');
@@ -37,5 +43,36 @@ class MonitoringSystemServiceProvider extends ServiceProvider
             \Illuminate\Contracts\Debug\ExceptionHandler::class,
             CustomExceptionHandler::class
         );
+        DB::listen(function ($query) {
+            if (app()->runningInConsole() || $this->isQueryLogQuery($query)) {
+                return;
+            }
+
+            $this->logQuery($query);
+        });
+    }
+
+    private function isQueryLogQuery($query)
+    {
+        if (strpos($query->sql, 'query_logs') !== false) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function logQuery(QueryExecuted $query)
+    {
+        $sql = $query->sql;
+        $bindings = $query->bindings;
+        $time = $query->time;
+
+        // Format the query with bindings
+        $formattedQuery = vsprintf(str_replace('?', '%s', $sql), $bindings);
+
+        QueryLog::create([
+            'query' => $formattedQuery,
+            'time' => $time,
+        ]);
     }
 }

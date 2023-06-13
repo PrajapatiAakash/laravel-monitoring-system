@@ -6,7 +6,6 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 use Psr\Log\LogLevel;
 use PrajapatiAakash\LaravelMonitoringSystem\Models\ErrorLog;
-use PrajapatiAakash\LaravelMonitoringSystem\Models\RequestLog;
 use PrajapatiAakash\LaravelMonitoringSystem\StoreRequestLog;
 
 class CustomExceptionHandler extends ExceptionHandler

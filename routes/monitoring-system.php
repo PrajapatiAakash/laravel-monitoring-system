@@ -10,4 +10,5 @@ Route::group([
     Route::get('/', [DashboardController::class, 'index'])->name('monitoring-system.dashboard');
     Route::resource('request-logs', 'RequestLogController');
     Route::resource('error-logs', 'ErrorLogController');
+    Route::resource('query-logs', 'QueryLogController');
 });

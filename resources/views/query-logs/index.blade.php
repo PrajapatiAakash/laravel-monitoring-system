@@ -1,13 +1,13 @@
 <!-- home.blade.php -->
 @extends('laravel-monitoring-system::layout')
 
-@section('title', 'Error Logs')
+@section('title', 'Query Logs')
 
 @section('content')
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
     >
-        <h1 class="h2">Error Logs</h1>
+        <h1 class="h2">Query Logs</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
                 <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -24,37 +24,31 @@
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Log Level</th>
-                    <th scope="col">Message</th>
-                    <th scope="col">Code</th>
-                    <th scope="col">File Name</th>
-                    <th scope="col">Line Number</th>
+                    <th scope="col">Query</th>
+                    <th scope="col">Time</th>
                     <th scope="col">Created Date</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($errorLogs as $errorLog)
+                @forelse($queryLogs as $queryLog)
                     <tr>
-                        <td>{{ $errorLog->id }}</td>
-                        <td>{{ $errorLog->log_level }}</td>
-                        <td>{{ $errorLog->message }}</td>
-                        <td>{{ $errorLog->code }}</td>
-                        <td>{{ $errorLog->file }}</td>
-                        <td>{{ $errorLog->line }}</td>
-                        <td>{{ $errorLog->created_at }}</td>
+                        <td>{{ $queryLog->id }}</td>
+                        <td>{{ $queryLog->query }}</td>
+                        <td>{{ $queryLog->time }}</td>
+                        <td>{{ $queryLog->created_at }}</td>
                         <td>
-                            <a href="{{ route('error-logs.show', $errorLog->id) }}" class="btn btn-primary">View</a>
-                            <button class="btn btn-danger" onclick="deleteRecord({{ $errorLog->id }})">Delete</button>
+                            <a href="{{ route('query-logs.show', $queryLog->id) }}" class="btn btn-primary">View</a>
+                            <button class="btn btn-danger" onclick="deleteRecord({{ $queryLog->id }})">Delete</button>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="text-center">No Record(s) found.</td>
+                        <td colspan="5" class="text-center">No Record(s) found.</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
-        {{ $errorLogs->links() }}
+        {{ $queryLogs->links() }}
     </div>
 @endsection

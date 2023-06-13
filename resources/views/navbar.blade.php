@@ -20,9 +20,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link @if(str_contains(request()->route()->getName(), 'query-logs')) active @endif" href="{{ route('query-logs.index') }}">
                     <span data-feather="users"></span>
-                    Customers
+                    Query Logs
                 </a>
             </li>
             <li class="nav-item">
