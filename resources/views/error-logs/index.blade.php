@@ -1,12 +1,12 @@
 <!-- home.blade.php -->
 @extends('laravel-monitoring-system::layout')
 
-@section('title', 'Request Logs')
+@section('title', 'Error Logs')
 
 @section('content')
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Request Logs</h1>
+        <h1 class="h2">Error Logs</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
                 <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -23,28 +23,28 @@
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Url</th>
-                    <th scope="col">Method</th>
-                    <th scope="col">Ip Addres</th>
-                    <th scope="col">Status Code</th>
-                    <th scope="col">Response Time</th>
+                    <th scope="col">Log Level</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">File Name</th>
+                    <th scope="col">Line Number</th>
                     <th scope="col">Created Date</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($requestLogs as $requestLog)
+                @forelse($errorLogs as $errorLog)
                     <tr>
-                        <td>{{ $requestLog->id }}</td>
-                        <td>{{ $requestLog->url }}</td>
-                        <td>{{ $requestLog->method }}</td>
-                        <td>{{ $requestLog->ip_address }}</td>
-                        <td>{{ $requestLog->status_code }}</td>
-                        <td>{{ $requestLog->response_time . 'ms' }}</td>
-                        <td>{{ $requestLog->created_at }}</td>
+                        <td>{{ $errorLog->id }}</td>
+                        <td>{{ $errorLog->log_level }}</td>
+                        <td>{{ $errorLog->message }}</td>
+                        <td>{{ $errorLog->code }}</td>
+                        <td>{{ $errorLog->file }}</td>
+                        <td>{{ $errorLog->line }}</td>
+                        <td>{{ $errorLog->created_at }}</td>
                         <td>
-                            <a href="{{ route('request-logs.show', $requestLog->id) }}" class="btn btn-primary">View</a>
-                            <button class="btn btn-danger" onclick="deleteRecord({{ $requestLog->id }})">Delete</button>
+                            <a href="{{ route('error-logs.show', $errorLog->id) }}" class="btn btn-primary">View</a>
+                            <button class="btn btn-danger" onclick="deleteRecord({{ $errorLog->id }})">Delete</button>
                         </td>
                     </tr>
                 @empty
@@ -54,6 +54,6 @@
                 @endforelse
             </tbody>
         </table>
-        {{ $requestLogs->links() }}
+        {{ $errorLogs->links() }}
     </div>
 @endsection

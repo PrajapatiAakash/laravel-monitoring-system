@@ -5,7 +5,7 @@ namespace PrajapatiAakash\LaravelMonitoringSystem\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use PrajapatiAakash\LaravelMonitoringSystem\Models\RequestLog;
+use PrajapatiAakash\LaravelMonitoringSystem\StoreRequestLog;
 
 class LogRequestsAndResponses
 {
@@ -17,18 +17,8 @@ class LogRequestsAndResponses
     public function handle(Request $request, Closure $next): Response
     {
         $response = $next($request);
+        StoreRequestLog::saveRequestLog($request, $response);
 
-        RequestLog::create([
-            'user_id' => 0,
-            'url' => $request->path(),
-            'full_url' => $request->fullUrl(),
-            'method' => $request->getMethod(),
-            'payload' => json_encode($request->all()),
-            'ip_address' => $request->ip(),
-            'user_agent' => $request->userAgent(),
-            'status_code' => $response->getStatusCode(),
-            'response_content' => $response->getContent(),
-        ]);
 
         return $response;
     }

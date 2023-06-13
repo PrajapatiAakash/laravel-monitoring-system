@@ -5,20 +5,19 @@ namespace PrajapatiAakash\LaravelMonitoringSystem\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RequestLog extends Model
+class ErrorLog extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'request_log_id',
         'user_id',
-        'url',
-        'full_url',
-        'method',
-        'payload',
-        'ip_address',
-        'user_agent',
-        'status_code',
-        'response_content',
-        'response_time',
+        'message',
+        'code',
+        'file',
+        'line',
+        'trace',
+        'trace_as_string',
+        'log_level',
     ];
 }
