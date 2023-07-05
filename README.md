@@ -52,13 +52,14 @@ Register the middleware:
 In your Laravel application, open the config/app.php file and add your package's service provider to the providers array:
     'providers' => [
         // Other service providers...
-        YourVendorName\YourPackageName\YourPackageServiceProvider::class,
+        \PrajapatiAakash\LaravelMonitoringSystem\Providers\MonitoringSystemServiceProvider:class
     ],
 
 Publish the package's assets (optional):
     If you want to customize or modify the package's assets, you can publish them to your Laravel application. Run the following command in your Laravel application's terminal to publish the assets:
 
-    php artisan vendor:publish --tag=laravel-monitoring-system
+    php artisan vendor:publish --tag=laravel-monitoring-system-views
+    php artisan vendor:publish --tag=laravel-monitoring-system-assets
 
 Run the database migrations (**Set the database connection in .env before migrating**)
 

@@ -32,7 +32,7 @@ class StoreRequestLog
             'payload' => json_encode($request->all()),
             'ip_address' => $request->ip(),
             'user_agent' => $request->userAgent(),
-            'status_code' => $response ? $response->getStatusCode() : '',
+            'status_code' => $response ? $response->getStatusCode() : '500',
             'response_content' => $response ? $response->getContent() : '',
             'response_time' => StoreRequestLog::calculateResponseTime($request),
         ]);

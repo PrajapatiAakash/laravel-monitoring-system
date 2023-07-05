@@ -9,32 +9,32 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link @if(str_contains(request()->route()->getName(), 'request-logs')) active @endif" href="{{ route('request-logs.index') }}">
-                    <span data-feather="file"></span>
+                    <span data-feather="git-pull-request"></span>
                     Request Logs
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link @if(str_contains(request()->route()->getName(), 'error-logs')) active @endif" href="{{ route('error-logs.index') }}">
-                    <span data-feather="shopping-cart"></span>
+                    <span data-feather="file-text"></span>
                     Error Logs
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link @if(str_contains(request()->route()->getName(), 'query-logs')) active @endif" href="{{ route('query-logs.index') }}">
-                    <span data-feather="users"></span>
+                    <span data-feather="database"></span>
                     Query Logs
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="server"></span>
+                    Server Monitoring
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
                     <span data-feather="bar-chart-2"></span>
                     Reports
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="layers"></span>
-                    Integrations
                 </a>
             </li>
         </ul>
