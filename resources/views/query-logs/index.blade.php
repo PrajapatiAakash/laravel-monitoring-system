@@ -52,12 +52,14 @@
                         <td>{{ $queryLog->time }}</td>
                         <td>{{ $queryLog->created_at }}</td>
                         <td>
-                            <a href="{{ route('query-logs.show', $queryLog->id) }}" class="btn btn-primary">View</a>
-                            <form action="{{ route('query-logs.destroy', $queryLog->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this query log?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="deleteRecord({{ $queryLog->id }})">Delete</button>
-                            </form>
+                            <div class="d-flex align-items-center">
+                                <a href="{{ route('query-logs.show', $queryLog->id) }}" class="btn btn-primary me-2">View</a>
+                                <form action="{{ route('query-logs.destroy', $queryLog->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this query log?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="deleteRecord({{ $queryLog->id }})">Delete</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @empty

@@ -73,12 +73,14 @@
                         <td>{{ $requestLog->response_time . 'ms' }}</td>
                         <td>{{ $requestLog->created_at }}</td>
                         <td>
-                            <a href="{{ route('request-logs.show', $requestLog->id) }}" class="btn btn-primary">View</a>
-                            <form action="{{ route('request-logs.destroy', $requestLog->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this request log?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="deleteRecord({{ $requestLog->id }})">Delete</button>
-                            </form>
+                            <div class="d-flex align-items-center">
+                                <a href="{{ route('request-logs.show', $requestLog->id) }}" class="btn btn-primary me-2">View</a>
+                                <form action="{{ route('request-logs.destroy', $requestLog->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this request log?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="deleteRecord({{ $requestLog->id }})">Delete</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @empty
