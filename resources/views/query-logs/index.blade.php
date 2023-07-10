@@ -9,6 +9,24 @@
     >
         <h1 class="h2">Query Logs</h1>
     </div>
+    <form id="searchForm" action="{{ route('query-logs.index') }}" method="GET" class="flex items-center">
+        <div class="row">
+            <div class="col-6" style="padding-right: 2px;">
+            <div class="mb-3">
+                <input type="text" class="form-control"
+                    name="search"
+                    placeholder="Search by id, and query"
+                    value="{{ request()->query('search') }}"
+                >
+            </div>
+            </div>
+            <div class="col-2" style="padding-left: 0px;">
+                <div class="mb-3">
+                    <button class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
+    </form>
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <thead>
@@ -24,7 +42,12 @@
                 @forelse($queryLogs as $queryLog)
                     <tr>
                         <td>{{ $queryLog->id }}</td>
-                        <td>{{ $queryLog->query }}</td>
+                        <td>
+                            <div class="td-limited-content" style="width: 700px;">
+                                {{ $queryLog->query }}
+                            </div>
+                            <a class="view-more" href="#">View More</a>
+                        </td>
                         <td>{{ $queryLog->time }}</td>
                         <td>{{ $queryLog->created_at }}</td>
                         <td>
@@ -39,6 +62,6 @@
                 @endforelse
             </tbody>
         </table>
-        {{ $queryLogs->links() }}
+        {{ $queryLogs->links('laravel-monitoring-system::pagination.bootstrap-5') }}
     </div>
 @endsection

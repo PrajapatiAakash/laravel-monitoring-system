@@ -14,7 +14,14 @@ class QueryLogController extends Controller
      */
     public function index(Request $request)
     {
-        $queryLogs = QueryLog::orderBy('id', 'desc')->paginate(10); // Retrieve 10 records per page
+        $queryLogs = QueryLog::orderBy('id', 'desc');
+
+        $search = $request->input('search');
+        if ($search) {
+            $queryLogs = $queryLogs->where('id', 'like', '%' . $search . '%')
+                ->orWhere('query', 'like', '%' . $search . '%');
+        }
+        $queryLogs = $queryLogs->paginate(10);
 
         return view('laravel-monitoring-system::query-logs.index', ['queryLogs' => $queryLogs]);
     }

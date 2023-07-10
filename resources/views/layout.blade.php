@@ -9,6 +9,7 @@
     <title>@yield('title')</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{{ asset('vendor/laravel-monitoring-system/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/laravel-monitoring-system/css/select2.min.css') }}">
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -26,11 +27,12 @@
     </style>
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{{ asset('vendor/laravel-monitoring-system/css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/laravel-monitoring-system/css/main.css') }}">
 </head>
 
 <body>
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Monitoring System</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{{ route('monitoring-system.dashboard') }}">Monitoring System</a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -39,7 +41,7 @@
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
-                <a class="nav-link px-3" href="#">Sign out</a>
+                <a class="nav-link px-3" href="{{ route('logout') }}">Logout</a>
             </div>
         </div>
     </header>
@@ -52,7 +54,9 @@
             </main>
         </div>
     </div>
+    <script src="{{ asset('vendor/laravel-monitoring-system/js/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/laravel-monitoring-system/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('vendor/laravel-monitoring-system/js/select2.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
         integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
     </script>
@@ -60,6 +64,7 @@
         integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous">
     </script>
     {{-- <script src="{{ asset('vendor/laravel-monitoring-system/js/dashboard.js') }}"></script> --}}
+    <script src="{{ asset('vendor/laravel-monitoring-system/js/main.js') }}"></script>
     @stack('scripts')
 </body>
 

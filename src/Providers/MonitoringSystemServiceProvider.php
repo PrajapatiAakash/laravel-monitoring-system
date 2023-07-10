@@ -31,6 +31,12 @@ class MonitoringSystemServiceProvider extends ServiceProvider
     {
         $this->app['router']->aliasMiddleware('logrequestsandresponses', LogRequestsAndResponses::class);
         $this->loadRoutesFrom(__DIR__.'/../../routes/monitoring-system.php');
+        $this->mergeConfigFrom(__DIR__.'/../../config/laravel-monitoring-system.php', 'laravel-monitoring-system');
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../../config/laravel-monitoring-system.php' => config_path('laravel-monitoring-system.php'),
+            ], 'laravel-monitoring-system-config');
+        }
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'laravel-monitoring-system');
         $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
         $this->publishes([

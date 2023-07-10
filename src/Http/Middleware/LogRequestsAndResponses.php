@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use PrajapatiAakash\LaravelMonitoringSystem\StoreRequestLog;
+use Illuminate\Support\Str;
 
 class LogRequestsAndResponses
 {
@@ -17,8 +18,10 @@ class LogRequestsAndResponses
     public function handle(Request $request, Closure $next): Response
     {
         $response = $next($request);
-        StoreRequestLog::saveRequestLog($request, $response);
-
+        $routePrefix = "admin/monitoring-system";
+        if (!Str::startsWith($request->path(), $routePrefix)) {
+            StoreRequestLog::saveRequestLog($request, $response);
+        }
 
         return $response;
     }

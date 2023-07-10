@@ -1,0 +1,39 @@
+td {
+    position: relative;
+}
+
+.td-limited-content {
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+}
+
+.view-more {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: none;
+}
+
+td:hover .view-more {
+    display: inline;
+}
+
+table thead tr th {
+    text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .content {
+        width: auto;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
+    }
+
+    .view-more {
+        display: inline;
+    }
+}

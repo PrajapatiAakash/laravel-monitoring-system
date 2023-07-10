@@ -14,9 +14,31 @@ class ErrorLogController extends Controller
      */
     public function index(Request $request)
     {
-        $errorLogs = ErrorLog::orderBy('id', 'desc')->paginate(10); // Retrieve 10 records per page
+        $errorLogs = ErrorLog::orderBy('id', 'desc');
 
-        return view('laravel-monitoring-system::error-logs.index', ['errorLogs' => $errorLogs]);
+        $search = $request->input('search');
+        if ($search) {
+            $errorLogs = $errorLogs->where('id', 'like', '%' . $search . '%')
+                ->orWhere('message', 'like', '%' . $search . '%')
+                ->orWhere('file', 'like', '%' . $search . '%');
+        }
+        $logLevel = [
+            'error',
+            'warning',
+            'info',
+        ];
+        if ($request->has('log_level')) {
+            $logLevel = $request->input('log_level');
+        }
+        if ($logLevel) {
+            $errorLogs = $errorLogs->whereIn('log_level', $logLevel);
+        }
+        $errorLogs = $errorLogs->paginate(10);
+
+        return view('laravel-monitoring-system::error-logs.index', [
+            'errorLogs' => $errorLogs,
+            'logLevel' => $logLevel,
+        ]);
     }
 
     /**

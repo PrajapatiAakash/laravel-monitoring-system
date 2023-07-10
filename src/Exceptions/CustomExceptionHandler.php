@@ -12,7 +12,6 @@ class CustomExceptionHandler extends ExceptionHandler
 {
     public function report(Throwable $exception)
     {
-        dd($exception);
         $requestLog = StoreRequestLog::saveRequestLog(request(), null);
 
         ErrorLog::create([

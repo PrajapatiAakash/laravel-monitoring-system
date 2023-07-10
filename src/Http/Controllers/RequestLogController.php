@@ -14,9 +14,32 @@ class RequestLogController extends Controller
      */
     public function index(Request $request)
     {
-        $requestLogs = RequestLog::orderBy('id', 'desc')->paginate(10); // Retrieve 10 records per page
+        $requestLogs = RequestLog::orderBy('id', 'desc');
 
-        return view('laravel-monitoring-system::request-logs.index', ['requestLogs' => $requestLogs]);
+        $search = $request->input('search');
+        if ($search) {
+            $requestLogs = $requestLogs->where('id', 'like', '%' . $search . '%')
+                ->orWhere('url', 'like', '%' . $search . '%')
+                ->orWhere('method', 'like', '%' . $search . '%')
+                ->orWhere('ip_address', 'like', '%' . $search . '%');
+        }
+        $statusCode = [
+            '200',
+            '404',
+            '500',
+        ];
+        if ($request->has('status_code')) {
+            $statusCode = $request->input('status_code');
+        }
+        if ($statusCode) {
+            $requestLogs = $requestLogs->whereIn('status_code', $statusCode);
+        }
+        $requestLogs = $requestLogs->paginate(10);
+
+        return view('laravel-monitoring-system::request-logs.index', [
+            'requestLogs' => $requestLogs,
+            'statusCode' => $statusCode,
+        ]);
     }
 
     /**

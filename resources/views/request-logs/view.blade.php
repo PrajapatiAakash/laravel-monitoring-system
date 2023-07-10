@@ -50,7 +50,9 @@
                 </tr>
                 <tr>
                     <td>Response Content</td>
-                    <td>{{ $requestLog->response_content }}</td>
+                    <td>
+                        {{ $requestLog->response_content }}
+                    </td>
                 </tr>
                 <tr>
                     <td>Created Date</td>

@@ -26,7 +26,7 @@ class StoreRequestLog
 
         return RequestLog::create([
             'user_id' => $userId,
-            'url' => $request->path(),
+            'url' => $request->getRequestUri(),
             'full_url' => $request->fullUrl(),
             'method' => $request->getMethod(),
             'payload' => json_encode($request->all()),
