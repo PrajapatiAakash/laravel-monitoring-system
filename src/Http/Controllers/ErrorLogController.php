@@ -33,7 +33,7 @@ class ErrorLogController extends Controller
         if ($logLevel) {
             $errorLogs = $errorLogs->whereIn('log_level', $logLevel);
         }
-        $errorLogs = $errorLogs->paginate(10);
+        $errorLogs = $errorLogs->paginate(config('laravel-monitoring-system.pagination_limit'));
 
         return view('laravel-monitoring-system::error-logs.index', [
             'errorLogs' => $errorLogs,
@@ -50,5 +50,15 @@ class ErrorLogController extends Controller
         $errorLog = ErrorLog::find($id);
 
         return view('laravel-monitoring-system::error-logs.view', ['errorLog' => $errorLog]);
+    }
+
+    /**
+     * This function is used for destroy the errorLog
+     */
+    public function destroy(ErrorLog $errorLog)
+    {
+        $errorLog->delete();
+
+        return redirect()->route('error-logs.index', ['is_deleted' => true]);
     }
 }

@@ -8,6 +8,7 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Request Logs</h1>
     </div>
+    <x-laravel-monitoring-system::success-flash-message title="Request Log has been deleted successfully." />
     <form id="searchForm" action="{{ route('request-logs.index') }}" method="GET" class="flex items-center">
         <div class="row">
             <div class="col-6" style="padding-right: 2px;">
@@ -73,7 +74,11 @@
                         <td>{{ $requestLog->created_at }}</td>
                         <td>
                             <a href="{{ route('request-logs.show', $requestLog->id) }}" class="btn btn-primary">View</a>
-                            <button class="btn btn-danger" onclick="deleteRecord({{ $requestLog->id }})">Delete</button>
+                            <form action="{{ route('request-logs.destroy', $requestLog->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this request log?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" onclick="deleteRecord({{ $requestLog->id }})">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @empty

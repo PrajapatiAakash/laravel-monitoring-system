@@ -34,7 +34,7 @@ class RequestLogController extends Controller
         if ($statusCode) {
             $requestLogs = $requestLogs->whereIn('status_code', $statusCode);
         }
-        $requestLogs = $requestLogs->paginate(10);
+        $requestLogs = $requestLogs->paginate(config('laravel-monitoring-system.pagination_limit'));
 
         return view('laravel-monitoring-system::request-logs.index', [
             'requestLogs' => $requestLogs,
@@ -51,5 +51,15 @@ class RequestLogController extends Controller
         $requestLog = RequestLog::find($id);
 
         return view('laravel-monitoring-system::request-logs.view', ['requestLog' => $requestLog]);
+    }
+
+    /**
+     * This function is used for destroy the requestLog
+     */
+    public function destroy(RequestLog $requestLog)
+    {
+        $requestLog->delete();
+
+        return redirect()->route('request-logs.index', ['is_deleted' => true]);
     }
 }

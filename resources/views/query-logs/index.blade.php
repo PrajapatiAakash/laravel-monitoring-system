@@ -9,6 +9,7 @@
     >
         <h1 class="h2">Query Logs</h1>
     </div>
+    <x-laravel-monitoring-system::success-flash-message title="Query Log has been deleted successfully." />
     <form id="searchForm" action="{{ route('query-logs.index') }}" method="GET" class="flex items-center">
         <div class="row">
             <div class="col-6" style="padding-right: 2px;">
@@ -52,7 +53,11 @@
                         <td>{{ $queryLog->created_at }}</td>
                         <td>
                             <a href="{{ route('query-logs.show', $queryLog->id) }}" class="btn btn-primary">View</a>
-                            <button class="btn btn-danger" onclick="deleteRecord({{ $queryLog->id }})">Delete</button>
+                            <form action="{{ route('query-logs.destroy', $queryLog->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this query log?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" onclick="deleteRecord({{ $queryLog->id }})">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @empty
