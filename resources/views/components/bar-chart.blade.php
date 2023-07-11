@@ -9,25 +9,17 @@
 @push('scripts')
     <script>
         const data_{{ $canvasElementId }} = {
-            labels: @json($data->pluck('log_level')),
+            labels: @json($data->pluck('day')),
             datasets: [{
                 label: '{{ $attributes->get('title') }}',
                 data: @json($data->pluck('count')),
-                backgroundColor: [
-                    'rgb(240, 17, 54)',
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)',
-                    'rgb(255, 100, 86)',
-                    'rgb(100, 205, 86)',
-                    'rgb(255, 150, 145)',
-                    'rgb(150, 205, 125)',
-                    'rgb(255, 185, 212)',
-                ],
-                hoverOffset: 4
+                fill: false,
+                backgroundColor: @json($data->pluck('backgroundcolor')),
+                tension: 0.1
             }]
         };
         const config_{{ $canvasElementId }} = {
-            type: 'doughnut',
+            type: 'bar',
             data: data_{{ $canvasElementId }},
             options: {
                 responsive: true,
@@ -38,7 +30,6 @@
                 }
             },
         };
-        // Graphs
         const {{ $canvasElementId }}_Element = document.getElementById('{{ $canvasElementId }}');
         const {{ $canvasElementId }}_Chart = new Chart({{ $canvasElementId }}_Element, config_{{ $canvasElementId }});
     </script>

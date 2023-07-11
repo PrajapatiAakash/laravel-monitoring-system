@@ -12,7 +12,7 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $requestLogs = DB::table('request_logs')
-            ->select(DB::raw('DAY(created_at) as day'), DB::raw('COUNT(*) as count'))
+            ->select(DB::raw('DAY(created_at) as day'), DB::raw('COUNT(*) as count'), DB::raw("'rgb(240, 17, 54)' as backgroundcolor"))
             ->whereRaw('FORMAT(created_at, \'yyyy-MM\') = ?', [
                 Carbon::now()->format('Y-m')
             ])
