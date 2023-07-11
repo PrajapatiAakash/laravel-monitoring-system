@@ -10,6 +10,9 @@ class QueryLog extends Model
     use HasFactory;
 
     protected $fillable = [
+        'url',
+        'full_url',
+        'method',
         'query',
         'time',
     ];

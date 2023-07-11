@@ -10,6 +10,7 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{{ asset('vendor/laravel-monitoring-system/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/laravel-monitoring-system/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/laravel-monitoring-system/css/daterangepicker.css') }}">
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -55,8 +56,10 @@
         </div>
     </div>
     <script src="{{ asset('vendor/laravel-monitoring-system/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/laravel-monitoring-system/js/moment.min.js') }}"></script>
     <script src="{{ asset('vendor/laravel-monitoring-system/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('vendor/laravel-monitoring-system/js/select2.min.js') }}"></script>
+    <script src="{{ asset('vendor/laravel-monitoring-system/js/daterangepicker.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
         integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
     </script>

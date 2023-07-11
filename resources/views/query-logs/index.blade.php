@@ -4,26 +4,32 @@
 @section('title', 'Query Logs')
 
 @section('content')
-    <div
-        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
-    >
-        <h1 class="h2">Query Logs</h1>
-    </div>
-    <x-laravel-monitoring-system::success-flash-message title="Query Log has been deleted successfully." />
     <form id="searchForm" action="{{ route('query-logs.index') }}" method="GET" class="flex items-center">
-        <div class="row">
-            <div class="col-6" style="padding-right: 2px;">
-            <div class="mb-3">
-                <input type="text" class="form-control"
-                    name="search"
-                    placeholder="Search by id, and query"
-                    value="{{ request()->query('search') }}"
-                >
+        <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+        >
+            <h1 class="h2">Query Logs</h1>
+            <div class="d-flex justify-content-end" style="width: 300px;">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="daterange"
+                    name="daterange"
+                    placeholder="Select date range for filter data"
+                    value="{{ request()->query('daterange') }}"
+                />
             </div>
-            </div>
-            <div class="col-2" style="padding-left: 0px;">
-                <div class="mb-3">
-                    <button class="btn btn-primary">Search</button>
+        </div>
+        <x-laravel-monitoring-system::success-flash-message title="Query Log has been deleted successfully." />
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="d-flex">
+                    <input type="text" class="form-control"
+                        name="search"
+                        placeholder="Search by id, and query"
+                        value="{{ request()->query('search') }}"
+                    >
+                    <button class="btn btn-primary ms-1">Search</button>
                 </div>
             </div>
         </div>
@@ -69,6 +75,9 @@
                 @endforelse
             </tbody>
         </table>
-        {{ $queryLogs->links('laravel-monitoring-system::pagination.bootstrap-5') }}
+        {{ $queryLogs->appends([
+            'search' => request()->query('search'),
+            'daterange' => request()->query('daterange'),
+        ])->links('laravel-monitoring-system::pagination.bootstrap-5') }}
     </div>
 @endsection

@@ -23,6 +23,14 @@
                     <td>{{ $queryLog->time }}</td>
                 </tr>
                 <tr>
+                    <td>Url</td>
+                    <td>{{ $queryLog->url }}</td>
+                </tr>
+                <tr>
+                    <td>Full Url</td>
+                    <td>{{ $queryLog->full_url }}</td>
+                </tr>
+                <tr>
                     <td>Created Date</td>
                     <td>{{ $queryLog->created_at }}</td>
                 </tr>

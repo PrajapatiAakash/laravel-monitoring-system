@@ -26,13 +26,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="javascript:void(0);">
                     <span data-feather="server"></span>
                     Server Monitoring
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="javascript:void(0);">
                     <span data-feather="bar-chart-2"></span>
                     Reports
                 </a>

@@ -5,6 +5,7 @@ namespace PrajapatiAakash\LaravelMonitoringSystem\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PrajapatiAakash\LaravelMonitoringSystem\Models\ErrorLog;
+use Carbon\Carbon;
 
 class ErrorLogController extends Controller
 {
@@ -16,12 +17,22 @@ class ErrorLogController extends Controller
     {
         $errorLogs = ErrorLog::orderBy('id', 'desc');
 
-        $search = $request->input('search');
-        if ($search) {
-            $errorLogs = $errorLogs->where('id', 'like', '%' . $search . '%')
-                ->orWhere('message', 'like', '%' . $search . '%')
-                ->orWhere('file', 'like', '%' . $search . '%');
+        if ($request->has('search') && $request->input('search')) {
+            $search = $request->input('search');
+            $errorLogs = $errorLogs->where(function ($query) use ($search) {
+                $query->orWhere('id', 'like', '%' . $search . '%')
+                    ->orWhere('message', 'like', '%' . $search . '%')
+                    ->orWhere('file', 'like', '%' . $search . '%');
+            });
         }
+
+        if ($request->has('daterange') && $request->input('daterange')) {
+            $daterange = $request->input('daterange');
+            $startDate = Carbon::parse(explode(' - ', $daterange)[0])->startOfDay();
+            $endDate = Carbon::parse(explode(' - ', $daterange)[1])->endOfDay();
+            $errorLogs = $errorLogs->whereBetween('created_at', [$startDate, $endDate]);
+        }
+
         $logLevel = [
             'error',
             'warning',
@@ -29,10 +40,9 @@ class ErrorLogController extends Controller
         ];
         if ($request->has('log_level')) {
             $logLevel = $request->input('log_level');
-        }
-        if ($logLevel) {
             $errorLogs = $errorLogs->whereIn('log_level', $logLevel);
         }
+
         $errorLogs = $errorLogs->paginate(config('laravel-monitoring-system.pagination_limit'));
 
         return view('laravel-monitoring-system::error-logs.index', [

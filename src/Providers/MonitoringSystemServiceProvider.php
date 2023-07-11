@@ -79,6 +79,8 @@ class MonitoringSystemServiceProvider extends ServiceProvider
         QueryLog::create([
             'query' => $formattedQuery,
             'time' => $time,
+            'url' => request()->getRequestUri(),
+            'full_url' => request()->fullUrl(),
         ]);
     }
 }

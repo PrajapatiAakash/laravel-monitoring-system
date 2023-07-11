@@ -13,4 +13,5 @@ $(document).ready(function() {
         placeholder: $(".select2").attr("placeholder"),
         allowClear: true
     });
+    $('#daterange').daterangepicker();
 });
