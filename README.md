@@ -60,6 +60,7 @@ Publish the package's assets (optional):
 
     php artisan vendor:publish --tag=laravel-monitoring-system-views
     php artisan vendor:publish --tag=laravel-monitoring-system-assets
+    php artisan vendor:publish --tag=laravel-monitoring-system-config
 
 Run the database migrations (**Set the database connection in .env before migrating**)
 

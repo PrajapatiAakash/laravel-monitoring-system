@@ -26,7 +26,7 @@
                 <div class="d-flex">
                     <input type="text" class="form-control"
                         name="search"
-                        placeholder="Search by id, and query"
+                        placeholder="Search query logs by id, or query"
                         value="{{ request()->query('search') }}"
                     >
                     <button class="btn btn-primary ms-1">Search</button>
